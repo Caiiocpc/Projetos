@@ -28,7 +28,7 @@ namespace ProjetoTransferenciaBancaria//.Classes
 
         public bool Sacar(double valorSaque)
         {
-            if(this.Saldo < valorSaque)
+            if (this.Saldo < valorSaque)
             {
                 Console.WriteLine("Saldo insuficiente!");
                 return false;
@@ -40,6 +40,34 @@ namespace ProjetoTransferenciaBancaria//.Classes
                     $"{this.Nome} é {this.Saldo}");
                 return true;
             }
+        }
+
+        public void Depositar(double deposito)
+        {
+            this.Saldo += deposito;
+            Console.WriteLine($"Saldo atual da conta de {this.Nome} é " +
+                $"{this.Saldo}");
+        }
+
+        public void Transferir(double valorTransferencia, Conta contaDestino)
+        {
+            if (this.Sacar(valorTransferencia))
+            {
+                contaDestino.Depositar(valorTransferencia);
+            }
+        }
+
+        public override string ToString()
+        {
+            string retorno = "";
+            retorno += "------------------------------------------\n";
+            retorno += " | " + "TipoConta: " + this.TipoConta + "|\n";
+            retorno += " | " + "Nome: " + this.Nome + "|\n";
+            retorno += " | " + "Saldo: " + this.Saldo + "|\n";
+            retorno += " | " + "Agencia: " + this.Agencia + " |\n";
+            retorno += " | " + "Conta: " + this.NumeroConta + "|\n";
+            retorno += "------------------------------------------\n";
+            return retorno;
         }
     }
 }
